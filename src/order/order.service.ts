@@ -1,14 +1,15 @@
-import { ProductDto } from './product.dto';
-import { Injectable } from '@nestjs/common';
+import { OrderDto } from './order.dto';
 import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
+import { Order } from './order.interface';
 import { InjectModel } from '@nestjs/mongoose';
-import { Product } from './product.interface';
-@Injectable()
-export class ProductService {
-  constructor(@InjectModel('product') private readonly model: Model<Product>) { }
 
-  async create(product: ProductDto): Promise<any> {
-    return await new this.model(product).save();
+@Injectable()
+export class OrderService {
+  constructor(@InjectModel('oder') private readonly model: Model<Order>) { }
+
+  async create(user: OrderDto): Promise<any> {
+    return await new this.model(user).save();
   }
   async findOne(id: string): Promise<any> {
     return await this.model.find({ _id: id }).exec();
