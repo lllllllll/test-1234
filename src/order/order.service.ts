@@ -20,10 +20,10 @@ export class OrderService {
   async findAll(): Promise<any> {
     return await this.model.find().exec();
   }
-  async update(id: string, isActive: boolean): Promise<any> {
+  async update(id: string, body: OrderDto): Promise<any> {
     return await this.model
       .update({ _id: id },
-        { isActive },
+        { body },
         { upsert: true },)
       .exec();
   }

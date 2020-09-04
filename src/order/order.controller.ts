@@ -25,7 +25,7 @@ export class OrderController {
     return await this.service.findByUser(userCode);
   }
   @Patch('/:id')
-  async update(@Param('id') id, @Body('isActive') isActive): Promise<any> {
-    return await this.service.update(id, isActive);
+  async update(@Param('id') id, @Body() body: OrderDto): Promise<any> {
+    return await this.service.update(id, body);
   }
 }
