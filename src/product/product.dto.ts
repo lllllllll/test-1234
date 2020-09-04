@@ -18,7 +18,6 @@ export class ProductDto {
 
   @ApiProperty()
   @IsNotEmpty({ message: 'กรุณาระบุ price' })
-  @IsNumber(null, { message: 'กรุณาระบุตัวเลขเท่านั้น'})
   price: number;
 }
 
