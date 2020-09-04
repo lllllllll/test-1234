@@ -1,16 +1,25 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class ProductDto {
-  @IsNotEmpty({ message: 'กรุณาระบุ Condo name' })
+  @ApiProperty()
+  @IsNotEmpty({ message: 'กรุณาระบุ code' })
   code: string;
+
+  @ApiProperty()
   @IsNotEmpty({ message: 'กรุณาระบุ Title' })
   title: string;
-  @IsNotEmpty({ message: 'กรุณาระบุ Description' })
-  description: string;
-  @IsNotEmpty({ message: 'กรุณาระบุ Photos' })
-  photos: string;
+
+  @ApiProperty()
+  description?: string;
+
+  @ApiProperty()
+  photos?: string;
+
+  @ApiProperty()
   @IsNotEmpty({ message: 'กรุณาระบุ price' })
-  price: string;
+  @IsNumber(null, { message: 'กรุณาระบุตัวเลขเท่านั้น'})
+  price: number;
 }
 
 export class ProductsDto {

@@ -6,7 +6,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class OrderService {
-  constructor(@InjectModel('oder') private readonly model: Model<Order>) { }
+  constructor(@InjectModel('order') private readonly model: Model<Order>) { }
 
   async create(user: OrderDto): Promise<any> {
     return await new this.model(user).save();
@@ -14,10 +14,17 @@ export class OrderService {
   async findOne(id: string): Promise<any> {
     return await this.model.find({ _id: id }).exec();
   }
+  async findByUser(userCode: string): Promise<any> {
+    return await this.model.find({ userCode }).exec();
+  }
   async findAll(): Promise<any> {
     return await this.model.find().exec();
   }
-  async remove(id: string): Promise<any> {
-    return await this.model.remove({ _id: id }).exec();
+  async update(id: string, isActive: boolean): Promise<any> {
+    return await this.model
+      .update({ _id: id },
+        { isActive },
+        { upsert: true },)
+      .exec();
   }
 }

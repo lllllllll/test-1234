@@ -20,8 +20,12 @@ export class OrderController {
   async findById(@Param('id') id): Promise<any> {
     return await this.service.findOne(id);
   }
+  @Get('/:userCode/by-user')
+  async findByUser(@Param('userCode') userCode): Promise<any> {
+    return await this.service.findByUser(userCode);
+  }
   @Patch('/:id')
-  async update(): Promise<any> {
-    return await this.service.findAll();
+  async update(@Param('id') id, @Body('isActive') isActive): Promise<any> {
+    return await this.service.update(id, isActive);
   }
 }
